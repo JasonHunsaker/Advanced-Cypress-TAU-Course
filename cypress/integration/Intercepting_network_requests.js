@@ -1,28 +1,36 @@
 /// <reference types="cypress" />
 
-
+//this test combines a UI & an API test in one
 
 it('Intercept requests', () => {
 
 
     cy //rather than setting a wait time, we can tell cypress to wait for a server response
         .intercept({
-            method: 'get',
+            method: 'POST',
             url: '/api/boards'
-        }) .as('boardList')
+        }) .as('createBoard')
 
 
     cy
       .visit('http://localhost:3000/')
 
-    cy
-        .wait('@boardList')
-        .its('response.statusCode')
-        .should('eq', 200)
+    cy 
+        .get('[data-cy=create-board')
+        .click()
 
-      
+    cy  
+        .get('[data-cy=new-board-input]')
+        .type('Launching a career{enter}')
+
     cy
-      .get('[data-cy=board-item]')
-      .should('have.length', 0)
+        .wait('@createBoard')
+        .then( (board) => {
+            expect(board.response.statusCode).to.eq(201)
+            expect(board.request.body.name).to.eq('Launching a career')
+        })
+        
+      
+    
   
   });
