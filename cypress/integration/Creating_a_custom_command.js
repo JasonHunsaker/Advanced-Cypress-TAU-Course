@@ -4,14 +4,14 @@ beforeEach(() => {
     
   })
 
-  Cypress.Commands.add('addBoard', () => {
+  Cypress.Commands.add('addBoard', (input) => {
     cy
     .get('[data-cy="create-board"]')
     .click();
 
   cy
     .get('[data-cy=new-board-input]')
-    .type('new board{enter}');
+    .type(input + '{enter}');
   })
   
   it('Custom commands', () => {
@@ -20,6 +20,6 @@ beforeEach(() => {
       .visit('localhost:3000');
   
     cy
-        .addBoard
+        .addBoard('todo')
   
   });
