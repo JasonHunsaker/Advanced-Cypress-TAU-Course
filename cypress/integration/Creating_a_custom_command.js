@@ -1,25 +1,19 @@
 /// <reference types="cypress" />
 
-beforeEach(() => {
-    
-  })
 
-  Cypress.Commands.add('addBoard', (input) => {
-    cy
-    .get('[data-cy="create-board"]')
-    .click();
 
-  cy
-    .get('[data-cy=new-board-input]')
-    .type(input + '{enter}');
-  })
+ Cypress.Commands.add('take', (input) => {
+     cy
+        .get(`[data-cy=${input}]`)
+ })
   
   it('Custom commands', () => {
   
     cy
-      .visit('localhost:3000');
+      .visit('http://localhost:3000/board/46846657518');
   
     cy
-        .addBoard('todo')
+        .get()
+        .take('task')
   
   });
