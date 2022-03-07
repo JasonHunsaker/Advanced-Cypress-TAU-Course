@@ -2,9 +2,19 @@
 
 
 
- Cypress.Commands.add('take', (input) => {
-     cy
-        .get(`[data-cy=${input}]`)
+ Cypress.Commands.add('take', {prevSubject: 'optional'}, (subject, input) => {
+
+    if (subject) {
+
+        cy
+            .wrap(subject)
+            .find(`[data-cy=${input}]`)
+
+    } else {
+        cy
+            .get(`[data-cy=${input}]`)
+    }
+     
  })
   
   it('Custom commands', () => {
@@ -13,7 +23,8 @@
       .visit('http://localhost:3000/board/46846657518');
   
     cy
-        .get()
+        .take('list')
+        .eq(0)
         .take('task')
   
   });
