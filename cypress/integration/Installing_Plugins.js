@@ -8,14 +8,10 @@ it('Installing plugins', () => {
     cy
       .get('[data-cy=task]')
       .eq(0)
-      .as('Task 2')
-  
-      .get('[data-cy=task]')
-      .eq(1)
-      .as('Task 1')
+      .click()
 
-      .get('@Task 2')
-      .drag('@Task 1')
-
+    cy
+        .get('.dropzone')
+        .attachFile('logo.png', {subjectType: 'drag-n-drop'}) //stored in fixtures folder
     
   });
