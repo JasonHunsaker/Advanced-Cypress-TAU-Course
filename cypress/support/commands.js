@@ -1,4 +1,5 @@
 require('@4tw/cypress-drag-drop')
+import 'cypress-file-upload';
 
 Cypress.Commands.add('addBoard', (input) => {
     cy
