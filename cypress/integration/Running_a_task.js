@@ -6,6 +6,6 @@ it('Running tast', () => {
       .request('POST', '/api/reset')
   
     cy
-      .visit('/')
+      .visit('localhost:3000')
   
   });
